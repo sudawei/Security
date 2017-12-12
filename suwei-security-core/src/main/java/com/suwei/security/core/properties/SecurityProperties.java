@@ -10,13 +10,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "suwei.security")
 public class SecurityProperties {
 
-    private BrowserProperties browserProperties = new BrowserProperties();
+    private BrowserProperties browser = new BrowserProperties();
 
-    public BrowserProperties getBrowserProperties() {
-        return browserProperties;
+    public BrowserProperties getBrowser() {
+        return browser;
     }
 
-    public void setBrowserProperties(BrowserProperties browserProperties) {
-        this.browserProperties = browserProperties;
+    public void setBrowser(BrowserProperties browser) {
+        this.browser = browser;
     }
 }

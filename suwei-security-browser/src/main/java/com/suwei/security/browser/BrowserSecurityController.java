@@ -2,9 +2,11 @@ package com.suwei.security.browser;
 
 import com.suwei.security.browser.support.ResponseCode;
 import com.suwei.security.browser.support.ServerResponse;
+import com.suwei.security.core.properties.SecurityProperties;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -32,6 +34,9 @@ public class BrowserSecurityController {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
+    @Autowired
+    private SecurityProperties securityProperties;
+
     /**
      * 当需要身份认证时，跳转到这里
      * @param request
@@ -40,14 +45,14 @@ public class BrowserSecurityController {
      */
     @RequestMapping("/authentication/require")
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
-    public ServerResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response){
+    public ServerResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
         SavedRequest savedRequest = requestCache.getRequest(request,response);
         if(savedRequest != null){
             String redirectUrl = savedRequest.getRedirectUrl();
             logger.info("引发跳转的请求是: {}",redirectUrl);
             //判断url的类型
             if(StringUtils.endsWith(redirectUrl,".html")){
-                redirectStrategy.sendRedirect(request,response,"");
+                redirectStrategy.sendRedirect(request,response,securityProperties.getBrowser().getLoginPage());
             }
         }
         return  ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_AUTHORIZED.getCode(),"访问的服务需要身份认证");

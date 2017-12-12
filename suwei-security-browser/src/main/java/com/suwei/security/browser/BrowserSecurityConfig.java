@@ -1,5 +1,9 @@
 package com.suwei.security.browser;
 
+import com.suwei.security.browser.authentication.SuweiAuthenticationFailureHandler;
+import com.suwei.security.browser.authentication.SuweiAuthenticationSuccessHandler;
+import com.suwei.security.core.properties.SecurityProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,15 +17,27 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private SecurityProperties securityProperties;
+
+    @Autowired
+    private SuweiAuthenticationSuccessHandler suweiAuthenticationSuccessHandler;
+
+    @Autowired
+    private SuweiAuthenticationFailureHandler suweiAuthenticationFailureHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.formLogin()
                 .loginPage("/authentication/require")
                 .loginProcessingUrl("/authentication/form")
+                .successHandler(suweiAuthenticationSuccessHandler)
+                .failureHandler(suweiAuthenticationFailureHandler)
                 .and()
                 .authorizeRequests() //对下面的请求授权
-                .antMatchers("/imooc-signIn.html").permitAll()
+                .antMatchers("/authentication/require",
+                        securityProperties.getBrowser().getLoginPage()).permitAll()
                 .anyRequest()   //对任何请求
                 .authenticated() //都需要认证
                 .and()
