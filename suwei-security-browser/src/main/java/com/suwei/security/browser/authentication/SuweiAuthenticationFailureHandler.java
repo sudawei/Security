@@ -1,6 +1,7 @@
 package com.suwei.security.browser.authentication;
 
 import com.suwei.security.browser.support.JsonUtil;
+import com.suwei.security.browser.support.ServerResponse;
 import com.suwei.security.core.properties.LoginType;
 import com.suwei.security.core.properties.SecurityProperties;
 import org.slf4j.Logger;
@@ -35,15 +36,15 @@ public class SuweiAuthenticationFailureHandler extends SimpleUrlAuthenticationFa
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
 
         logger.info("登录失败");
-        PrintWriter out = response.getWriter();
         if(LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())){
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            //在getWriter()方法被调用之前调用
             response.setContentType("application/json;charset=UTF-8");
-            out.write(JsonUtil.obj2String(e));
+            response.getWriter().write(JsonUtil.obj2String(ServerResponse.createByErrorMessage(e.getMessage())));
         }else {
            super.onAuthenticationFailure(request,response,e);
         }
-        out.flush();
-        out.close();
+        response.getWriter().flush();
+        response.getWriter().close();
     }
 }

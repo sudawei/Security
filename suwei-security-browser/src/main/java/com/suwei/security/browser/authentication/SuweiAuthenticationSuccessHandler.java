@@ -32,15 +32,16 @@ public class SuweiAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+
         logger.info("登录成功");
-        PrintWriter out = response.getWriter();
         if(LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())){
+            //在getWriter()方法被调用之前调用
             response.setContentType("application/json;charset=UTF-8");
-            out.write(JsonUtil.obj2String(authentication));
+            response.getWriter().write(JsonUtil.obj2String(authentication));
         }else{
             super.onAuthenticationSuccess(request,response,authentication);
         }
-        out.flush();
-        out.close();
+        response.getWriter().flush();
+        response.getWriter().close();
     }
 }
