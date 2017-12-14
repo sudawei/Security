@@ -1,6 +1,7 @@
 package com.suwei.security.browser.authentication;
 
 import com.suwei.security.browser.support.JsonUtil;
+import com.suwei.security.browser.support.ServerResponse;
 import com.suwei.security.core.properties.LoginType;
 import com.suwei.security.core.properties.SecurityProperties;
 import org.slf4j.Logger;
@@ -37,7 +38,7 @@ public class SuweiAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
         if(LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())){
             //在getWriter()方法被调用之前调用
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(JsonUtil.obj2String(authentication));
+            response.getWriter().write(JsonUtil.obj2String(ServerResponse.createBySuccess("登录成功",authentication)));
         }else{
             super.onAuthenticationSuccess(request,response,authentication);
         }

@@ -5,12 +5,11 @@ import java.time.LocalDateTime;
 
 /**
  * @author : suwei
- * @description : 图片验证码
+ * @description : 短信验证码
  * @date : 2017\12\13 0013 14:40
  */
-public class ImageCode {
+public class ValidateCode {
 
-    private BufferedImage image;
 
     private String code;
 
@@ -18,18 +17,9 @@ public class ImageCode {
     private LocalDateTime expireTime;
 
 
-    public ImageCode(BufferedImage image, String code, int expireIn) {
-        this.image = image;
+    public ValidateCode(String code, int expireIn) {
         this.code = code;
         this.expireTime = LocalDateTime.now().plusSeconds(expireIn);
-    }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
     }
 
     public String getCode() {

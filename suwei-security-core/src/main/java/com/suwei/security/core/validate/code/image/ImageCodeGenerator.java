@@ -1,7 +1,7 @@
-package com.suwei.security.core.validate.code;
+package com.suwei.security.core.validate.code.image;
 
 import com.suwei.security.core.properties.SecurityProperties;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.suwei.security.core.validate.code.ValidateCodeGenerator;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
