@@ -12,7 +12,7 @@ import org.springframework.web.context.request.ServletWebRequest;
  * @description : 短信验证码处理器
  * @date : 2017\12\14 0014 14:41
  */
-@Component("smsCodeProcessor")
+@Component("smsValidateCodeProcessor")
 public class SmsCodeProcessor extends AbstractValidateCodeProcessor<ValidateCode> {
 
     @Autowired

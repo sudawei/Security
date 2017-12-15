@@ -18,7 +18,7 @@ import java.util.Random;
  * @description : 短信验证码生成器
  * @date : 2017\12\14 0014 10:09
  */
-@Component("smsCodeGenerator")
+@Component("smsValidateCodeGenerator")
 public class SmsCodeGenerator implements ValidateCodeGenerator {
 
     @Autowired
@@ -28,7 +28,7 @@ public class SmsCodeGenerator implements ValidateCodeGenerator {
     public ValidateCode generate(ServletWebRequest request){
 
         String code = RandomStringUtils.randomNumeric(securityProperties.getCode().getSms().getLength());
-        return new ValidateCode(code,securityProperties.getCode().getImage().getExpireIn());
+        return new ValidateCode(code,securityProperties.getCode().getSms().getExpireIn());
     }
 
 }

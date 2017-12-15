@@ -1,7 +1,5 @@
 package com.suwei.security.core.authentication.mobile;
 
-import com.suwei.security.core.properties.SecurityProperties;
-import com.suwei.security.core.validate.code.SmsCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

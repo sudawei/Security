@@ -1,5 +1,6 @@
 package com.suwei.security.core.authentication.mobile;
 
+import com.suwei.security.core.properties.SecurityConstants;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -19,16 +20,15 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
     // ~ Static fields/initializers
     // =====================================================================================
 
-    public static final String SUWEI_SECURITY_FORM_SMS_KEY = "mobile";
 
-    private String mobileParameter = SUWEI_SECURITY_FORM_SMS_KEY;
+    private String mobileParameter = SecurityConstants.DEFAULT_PARAMETER_NAME_MOBILE;;
     private boolean postOnly = true;
 
     // ~ Constructors
     // ===================================================================================================
 
     public SmsCodeAuthenticationFilter() {
-        super(new AntPathRequestMatcher("/authentication/mobile", "POST"));
+        super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, "POST"));
     }
 
     // ~ Methods

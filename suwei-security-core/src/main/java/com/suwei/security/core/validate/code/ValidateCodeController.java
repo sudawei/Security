@@ -1,5 +1,6 @@
 package com.suwei.security.core.validate.code;
 
+import com.suwei.security.core.properties.SecurityConstants;
 import com.suwei.security.core.validate.code.image.ImageCode;
 import com.suwei.security.core.validate.code.sms.SmsCodeSender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,22 +26,21 @@ import java.util.Map;
 @RestController
 public class ValidateCodeController {
 
-    /**
-     * 依赖搜索，spring 启动时，会将所有ValidateCodeProcessor的实现类放到这个map中
-     */
     @Autowired
-    private Map<String, ValidateCodeProcessor> validateCodeProcessors;
+    private ValidateCodeProcessorHolder validateCodeProcessorHolder;
 
     /**
      * 创建验证码，根据验证码类型不同，调用不同的 {@link ValidateCodeProcessor}接口实现
+     *
      * @param request
      * @param response
      * @param type
      * @throws Exception
      */
-    @GetMapping("/code/{type}")
-    public void createCode(HttpServletRequest request, HttpServletResponse response, @PathVariable String type) throws Exception {
-        validateCodeProcessors.get(type+"CodeProcessor").create(new ServletWebRequest(request, response));
+    @GetMapping(SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/{type}")
+    public void createCode(HttpServletRequest request, HttpServletResponse response, @PathVariable String type)
+            throws Exception {
+        validateCodeProcessorHolder.findValidateCodeProcessor(type).create(new ServletWebRequest(request, response));
     }
 
 }
