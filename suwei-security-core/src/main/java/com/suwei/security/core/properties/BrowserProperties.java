@@ -7,11 +7,13 @@ package com.suwei.security.core.properties;
  */
 public class BrowserProperties {
 
-    private String loginPage = "/imooc-signIn.html";
+    private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
 
     private LoginType loginType  = LoginType.JSON;
 
     private int rememberMeSeconds = 3600;
+
+    private String signUpUrl = "/suwei-signUp.html";
 
     public String getLoginPage() {
         return loginPage;
@@ -35,5 +37,13 @@ public class BrowserProperties {
 
     public void setRememberMeSeconds(int rememberMeSeconds) {
         this.rememberMeSeconds = rememberMeSeconds;
+    }
+
+    public String getSignUpUrl() {
+        return signUpUrl;
+    }
+
+    public void setSignUpUrl(String signUpUrl) {
+        this.signUpUrl = signUpUrl;
     }
 }

@@ -1,4 +1,4 @@
-package com.suwei.security.browser.support;
+package com.suwei.security.core.utils;
 
 
 import org.apache.commons.lang.StringUtils;
@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * @author : suwei
- * @description :
+ * @description : json转换
  * @date : 2017\11\28 0028 11:09
  */
 
@@ -94,7 +94,7 @@ public class JsonUtil {
         /**
          * 反序列化多对象类型的bean,如集合类
          * @param str
-         * @param typeReference 使用时如 new TypeReference<List<user>>(){}
+         * @param typeReference 使用时如 new TypeReference<List<security>>(){}
          * @param <T>
          * @return
          */

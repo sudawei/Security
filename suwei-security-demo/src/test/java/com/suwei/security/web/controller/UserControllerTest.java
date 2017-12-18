@@ -34,7 +34,7 @@ public class UserControllerTest {
 
     @Test
     public void whenQuerySuccess() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/user")
+        mockMvc.perform(MockMvcRequestBuilders.get("/security")
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(3));
@@ -42,7 +42,7 @@ public class UserControllerTest {
 
     @Test
     public void whenQueryUserInfoSuccess() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/user/1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/security/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("a"));
@@ -50,7 +50,7 @@ public class UserControllerTest {
 
     @Test
     public void whenQueryUserInfoFail() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/user/a")
+        mockMvc.perform(MockMvcRequestBuilders.get("/security/a")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError());
     }
