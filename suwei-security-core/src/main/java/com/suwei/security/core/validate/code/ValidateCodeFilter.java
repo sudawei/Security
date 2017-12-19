@@ -75,7 +75,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     }
 
     /**
-     * 讲系统中配置的需要校验验证码的URL根据校验的类型放入map
+     * 将系统中配置的需要校验验证码的URL根据校验的类型放入map
      *
      * @param urlString
      * @param type
@@ -103,7 +103,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
         ValidateCodeType type = getValidateCodeType(request);
         if (type != null) {
-            logger.info("校验请求(" + request.getRequestURI() + ")中的验证码,验证码类型" + type);
+            logger.info("校验请求(" + request.getRequestURI() + ")中的验证码,验证码类型为：" + type);
             try {
                 validateCodeProcessorHolder.findValidateCodeProcessor(type)
                         .validate(new ServletWebRequest(request, response));

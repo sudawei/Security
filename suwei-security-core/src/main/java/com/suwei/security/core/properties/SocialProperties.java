@@ -9,14 +9,6 @@ public class SocialProperties {
 
     private String filterProcessesUrl = "/auth";
 
-    public String getFilterProcessesUrl() {
-        return filterProcessesUrl;
-    }
-
-    public void setFilterProcessesUrl(String filterProcessesUrl) {
-        this.filterProcessesUrl = filterProcessesUrl;
-    }
-
     private QQProprerties qq = new QQProprerties();
 
     public QQProprerties getQq() {
@@ -25,5 +17,13 @@ public class SocialProperties {
 
     public void setQq(QQProprerties qq) {
         this.qq = qq;
+    }
+
+    public String getFilterProcessesUrl() {
+        return filterProcessesUrl;
+    }
+
+    public void setFilterProcessesUrl(String filterProcessesUrl) {
+        this.filterProcessesUrl = filterProcessesUrl;
     }
 }
