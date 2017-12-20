@@ -1,6 +1,7 @@
 package com.suwei.security.core.validate.code;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
  * @description : 短信验证码
  * @date : 2017\12\13 0013 14:40
  */
-public class ValidateCode {
+public class ValidateCode implements Serializable{
 
 
     private String code;
@@ -20,6 +21,10 @@ public class ValidateCode {
     public ValidateCode(String code, int expireIn) {
         this.code = code;
         this.expireTime = LocalDateTime.now().plusSeconds(expireIn);
+    }
+    public ValidateCode(String code, LocalDateTime expireTime){
+        this.code = code;
+        this.expireTime = expireTime;
     }
 
     public String getCode() {

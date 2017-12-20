@@ -7,6 +7,8 @@ package com.suwei.security.core.properties;
  */
 public class BrowserProperties {
 
+    private SessionProperties session = new SessionProperties();
+
     private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
 
     private LoginType loginType  = LoginType.JSON;
@@ -14,6 +16,8 @@ public class BrowserProperties {
     private int rememberMeSeconds = 3600;
 
     private String signUpUrl = "/suwei-signUp.html";
+
+    private String signOutUrl = "logout";
 
     public String getLoginPage() {
         return loginPage;
@@ -45,5 +49,21 @@ public class BrowserProperties {
 
     public void setSignUpUrl(String signUpUrl) {
         this.signUpUrl = signUpUrl;
+    }
+
+    public SessionProperties getSession() {
+        return session;
+    }
+
+    public void setSession(SessionProperties session) {
+        this.session = session;
+    }
+
+    public String getSignOutUrl() {
+        return signOutUrl;
+    }
+
+    public void setSignOutUrl(String signOutUrl) {
+        this.signOutUrl = signOutUrl;
     }
 }
